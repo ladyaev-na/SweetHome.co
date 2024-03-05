@@ -23,7 +23,7 @@ class OrderController extends Controller
         $order = OrderList::find($id);
         if ($order){
             $order->update($request->all());
-            return response()->json($order)->setStatusCode(407);
+            return response()->json(OrderListResource::make($order))->setStatusCode(200);
         }else{
             return response()->json()->setStatusCode(407,'Product add failed.');
         }

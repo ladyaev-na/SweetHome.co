@@ -43,16 +43,22 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
 
               // Функционал кондитера \\
 
+Route::middleware(['auth:api', 'role:confectioner'])->group(function () {
+
 //  позволяет просматривать все заказы
 Route::get('/orders', [OrderController::class, 'index']);
 
 // Изменение статуса заказа
 Route::patch('/orders/{id}/change-status', [OrderController::class, 'update']);
+});
+
+              // Функционал курьера \\
+
+Route::get('/orders');
 
 
 
-
-Route::get('/roles', [RoleController::class, 'index']);
+    Route::get('/roles', [RoleController::class, 'index']);
 Route::post('/roles', [RoleController::class, 'create']);
 Route::post('/category', [CategoryController::class, 'create']);
 Route::get('/product', [ProductController::class, 'index']);
