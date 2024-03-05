@@ -61,7 +61,13 @@ Route::middleware(['auth:api', 'role:delivery'])->group(function () {
     Route::get('/orders/{id}',[OrderController::class,'show']);
 });
 
+              // Функционал пользователя \\
 
+Route::middleware(['auth:api', 'role:user'])->group(function () {
+
+    // оформление заказа \\
+    Route::get('/order-create',[OrderController::class,'AddList']);
+});
 
 
 
