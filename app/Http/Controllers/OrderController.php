@@ -11,7 +11,9 @@ class OrderController extends Controller
 {
     public function index(){
         $orderList = OrderList::all();
-        return response()->json(OrderListResource::collection($orderList));
+        return response()
+            ->json(OrderListResource::collection($orderList))
+            ->setStatusCode(200);
     }
 
     public function update(StatusUpdateRequest $request, $id){
@@ -20,13 +22,15 @@ class OrderController extends Controller
             $order->update($request->all());
             return response()->json(OrderListResource::make($order))->setStatusCode(200);
         }else{
-            return response()->json()->setStatusCode(407,'Product add failed.');
+            return response()->json()->setStatusCode(403,'Product add failed.');
         }
     }
 
     public function show($id){
         $orderList = OrderList::find($id);
-        return response()->json(UserAddress::make($orderList))->setStatusCode(200);
+        return response()
+            ->json(UserAddress::make($orderList))
+            ->setStatusCode(200);
     }
 
     public function AddList(){

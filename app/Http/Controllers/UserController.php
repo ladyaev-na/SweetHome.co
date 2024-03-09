@@ -14,16 +14,16 @@ class UserController extends Controller
 {
     public function index(){
         $users = User::all();
-        return response()->json(UserResource::collection($users));
+        return response()->json(UserResource::collection($users))->setStatusCode(200);
     }
 
     public function create(UserCreateRequest $request){
         if ($request){
             $user = new User($request->all());
             $user->save();
-            return response()->json($user)->setStatusCode(200);
+            return response()->json($user)->setStatusCode(200, 'yes');
         }else{
-            return response()->json()->setStatusCode(400);
+            return response()->json()->setStatusCode(401,'Registration failed');
         }
 
     }
@@ -32,21 +32,29 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user){
             if ($id == 1){
-                return 'Пользователя admin редактировать запрещено.';
+                return response()
+                    ->json('Пользователя admin редактировать запрещено.')
+                    ->setStatusCode(403, 'Edit employee failed');
             }else{
                 $user->update($request->all());
-                return response()->json(UserResource::make($user))->setStatusCode(200);
+                return response()
+                    ->json(UserResource::make($user))
+                    ->setStatusCode(200);
             }
 
         }else{
-            return response()->json()->setStatusCode(406,'Edit employee failed.');
+            return response()->json()->setStatusCode(403,'Edit employee failed.');
         }
 
     }
 
     public function add(AddCreateRequest $request){
         $user = new User($request->all());
-        $user->save();
-        return response()->json($user)->setStatusCode(200);
+       if ($user){
+           $user->save();
+           return response()->json($user)->setStatusCode(200);
+       }else{
+           return response()->json()->setStatusCode(403, 'Add employee failed');
+       }
     }
 }

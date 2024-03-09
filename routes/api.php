@@ -58,7 +58,7 @@ Route::middleware(['auth:api', 'role:confectioner|delivery'])->group(function ()
 Route::middleware(['auth:api', 'role:delivery'])->group(function () {
 
     // просмотр пользовательских данных
-    Route::get('/orders/{id}',[OrderController::class,'show']);
+    Route::get('/orders/{id}',[OrderController::class,'sho w']);
 });
 
               // Функционал пользователя \\

@@ -13,21 +13,25 @@ class AuthController extends Controller
     public function login(LoginRequest $request){
         $credentials = request(['login','password']);
 
-        if (!Auth::attempt($credentials)){
-            throw new AoiException(401,'Авторизация не удалась');
-        }
+       if ($credentials){
+           if (!Auth::attempt($credentials)){
+               throw new AoiException(401,'Authentication failed');
+           }
 
-        $user = Auth::user();
-        $user->api_token = Hash::make(microtime(true)*1000);
-        $user->save();
+           $user = Auth::user();
+           $user->api_token = Hash::make(microtime(true)*1000);
+           $user->save();
 
-        return response()->json($user->api_token)->setStatusCode(202, 'ок');
+           return response()->json($user->api_token)->setStatusCode(200);
+       }else{
+           return response()->json()->setStatusCode(401, 'Authentication failed');
+       }
     }
 
     public function logout(Request $request){
         $user = $request->user();
         $user->api_token = null;
         $user->save();
-        return response()->json('Выход')->setStatusCode(202, 'ок');
+        return response()->json('Выход')->setStatusCode('logout');
     }
 }

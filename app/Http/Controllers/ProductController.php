@@ -16,17 +16,29 @@ class ProductController extends Controller
 
     public function create(ProductCreateRequest $request){
         $product = new Product($request->all());
-        $product->save();
-        return response()->json(ProductResource::make($product));
+       if ($product){
+           $product->save();
+           return response()
+               ->json(ProductResource::make($product))
+               ->setStatusCode(200);
+       }else{
+           return response()
+               ->json()
+               ->setStatusCode(403, 'Product add failed');
+       }
     }
 
     public function update(ProductUpdateRequest $request, $id){
         $product = Product::find($id);
         if ($product){
             $product->update($request->all());
-            return response()->json(ProductUpdateRequest::make($product))->setStatusCode(407);
+            return response()
+                ->json(ProductUpdateRequest::make($product))
+                ->setStatusCode(407);
         }else{
-            return response()->json()->setStatusCode(407,'Product add failed.');
+            return response()
+                ->json()
+                ->setStatusCode(403,'Product add failed.');
         }
     }
 
@@ -34,7 +46,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($product) {
             Product::destroy($id);
-            return response()->json('Продукт удален')->setStatusCode(200, 'Успешно');
+            return response()->json('Продукт удален')->setStatusCode(200);
         } else {
             return response()->json('Продукт не найден')->setStatusCode(404, 'Not found');
         }
