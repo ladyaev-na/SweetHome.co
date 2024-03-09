@@ -15,6 +15,6 @@ class ApiRequest extends FormRequest
 //Провал валидации
     function failedValidation(Validator $validator)
     {
-        throw new AoiException(422, 'Ошибка валидации данных', $validator->errors());
+        throw new AoiException(403, $validator->errors());
     }
 }

@@ -18,9 +18,14 @@ class UserController extends Controller
     }
 
     public function create(UserCreateRequest $request){
-        $user = new User($request->all());
-        $user->save();
-        return response()->json($user)->setStatusCode(200);
+        if ($request){
+            $user = new User($request->all());
+            $user->save();
+            return response()->json($user)->setStatusCode(200);
+        }else{
+            return response()->json()->setStatusCode(400);
+        }
+
     }
 
     public function update(UserUpdateRequest $request, $id){

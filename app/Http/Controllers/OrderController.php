@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\AoiException;
 use App\Http\Requests\StatusUpdateRequest;
-use App\Http\Requests\UserAdressCreate;
-use App\Http\Requests\UserCreateRequest;
 use App\Http\Resources\OrderListResource;
 use App\Http\Resources\UserAddress;
-use App\Models\Cart;
-use App\Models\Order;
 use App\Models\OrderList;
-use App\Models\Product;
-use App\Models\Status;
-use http\Client\Curl\User;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
