@@ -57,4 +57,17 @@ class UserController extends Controller
            return response()->json()->setStatusCode(403, 'Add employee failed');
        }
     }
+
+    public function updateUser(Request $request, $id){
+       $user = User::find($id);
+
+       if ($user->role_id = 4){
+
+           $user->update($request->all());
+           return response()->json($user)->setStatusCode(200);
+       }else{
+           return response()->json()
+               ->setStatusCode(403, 'Edit data failed');
+       }
+    }
 }

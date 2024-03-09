@@ -36,4 +36,11 @@ class OrderController extends Controller
     public function AddList(){
 
     }
+
+    public function history(){
+        $list = OrderList::all();
+        return response()
+            ->json(OrderListResource::collection($list))
+            ->setStatusCode(200);
+    }
 }

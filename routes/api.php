@@ -67,7 +67,12 @@ Route::middleware(['auth:api', 'role:user'])->group(function () {
 
     // оформление заказа \\
     Route::post('/order-create',[OrderController::class,'AddList']);
+
+    // Просмотр текущего статуса \\
+    Route::get('/order-history', [OrderController::class,'history']);
 });
+
+Route::patch('/user-info/{id}',[UserController::class,'updateUser']);
 
 
 
@@ -75,5 +80,3 @@ Route::get('/roles', [RoleController::class, 'index']);
 Route::post('/roles', [RoleController::class, 'create']);
 Route::post('/category', [CategoryController::class, 'create']);
 Route::get('/product', [ProductController::class, 'index']);
-
-
