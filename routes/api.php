@@ -14,7 +14,7 @@ Route::post('/reg', [UserController::class, 'create']);
 // Авторизация
 Route::post('/login', [AuthController::class, 'login']);
 // Выход
-Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:api')->get('/logout', [AuthController::class, 'logout']);
 
 
               // Функционал администратора \\
