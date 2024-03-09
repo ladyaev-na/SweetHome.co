@@ -70,9 +70,12 @@ Route::middleware(['auth:api', 'role:user'])->group(function () {
 
     // Просмотр текущего статуса \\
     Route::get('/order-history', [OrderController::class,'history']);
+
+    // Редактирование профиля \\
+    Route::patch('/user-info/{id}',[UserController::class,'updateUser']);
 });
 
-Route::patch('/user-info/{id}',[UserController::class,'updateUser']);
+
 
 
 
