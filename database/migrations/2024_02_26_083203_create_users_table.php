@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->bigInteger('tel');
             $table->string('api_token')->unique()->nullable();
-            $table->foreignId('role_id')->default(1)->constrained()->onUpdate('cascade');
+            $table->foreignId('role_id')->default(4)->constrained()->onUpdate('cascade');
             $table->timestamps();
         });
     }
