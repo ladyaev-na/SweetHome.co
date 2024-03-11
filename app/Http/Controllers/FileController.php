@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class FileController extends Controller
 {
     public function file(Request $request){
+
         $request->validate([
            'file' => 'required|file',
         ]);
