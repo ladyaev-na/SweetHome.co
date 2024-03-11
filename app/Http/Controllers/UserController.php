@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\AoiException;
 use App\Http\Requests\AddCreateRequest;
+use App\Http\Requests\ReviewCreateRequest;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Review;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -69,5 +74,15 @@ class UserController extends Controller
            return response()->json()
                ->setStatusCode(403, 'Edit data failed');
        }
+    }
+
+    public function createGrade(ReviewCreateRequest $request){
+
+       $userName = Auth::user()->id;
+        $review = new Review($request->all());
+       $review->user_id = $userName;
+       $review->save();
+
+       return response()->json($review)->setStatusCode(200);
     }
 }

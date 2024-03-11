@@ -21,5 +21,9 @@ class Order extends Model
         return $this->belongsTo(Status::class);
     }
 
+    public function review(){
+        return $this->belongsTo(Review::class);
+    }
+
     protected $fillable = ['user_id','status_id'];
 }

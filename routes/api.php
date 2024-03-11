@@ -65,14 +65,17 @@ Route::middleware(['auth:api', 'role:delivery'])->group(function () {
 
 Route::middleware(['auth:api', 'role:user'])->group(function () {
 
-    // оформление заказа \\
-    Route::post('/order-create',[OrderController::class,'AddList']);
+   /* // оформление заказа \\
+    Route::post('/order-create',[OrderController::class,'AddList']);*/
 
     // Просмотр текущего статуса \\
     Route::get('/order-history', [OrderController::class,'history']);
 
     // Редактирование профиля \\
     Route::patch('/user-info/{id}',[UserController::class,'updateUser']);
+
+    // размещение своего отзыва \\
+    Route::post('/user-review', [UserController::class,'createGrade']);
 });
 
 
