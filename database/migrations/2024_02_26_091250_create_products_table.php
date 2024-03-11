@@ -13,7 +13,7 @@ return new class extends Migration
             $table->decimal('price',16,2);
             $table->string('name', 127);
             $table->string('description');
-            $table->string('photo');
+            $table->foreignId('file_id')->constrained()->onUpdate('cascade');
             /* вес продукта */
             $table->integer('mass');
             $table->integer('quantity');

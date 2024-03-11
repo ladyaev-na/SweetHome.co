@@ -20,6 +20,9 @@ class Product extends Model
     }
 
     public function orderlists(){
-        return $this->hasMany(orderList::class);
+        return $this->hasMany(OrderList::class);
+    }
+    public function file(){
+        return $this->belongsTo(File::class);
     }
 }

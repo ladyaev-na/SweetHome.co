@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FileController;
 
 // Регистрация
 Route::post('/reg', [UserController::class, 'create']);
@@ -32,6 +33,9 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
 
     // Добавление карточки товара
     Route::post('/products', [ProductController::class, 'create']);
+
+    // Добавление файла
+    Route::post('/file',[FileController::class,'file']);
 
     // Редактирование карточки товара
     Route::patch('/products/edit/{id}', [ProductController::class, 'update']);
@@ -77,8 +81,7 @@ Route::middleware(['auth:api', 'role:user'])->group(function () {
     // размещение своего отзыва \\
     Route::post('/user-review', [UserController::class,'createGrade']);
 });
-use App\Http\Controllers\FileController;
-Route::post('/file',[FileController::class,'file']);
+
 
 
 
