@@ -77,7 +77,8 @@ Route::middleware(['auth:api', 'role:user'])->group(function () {
     // размещение своего отзыва \\
     Route::post('/user-review', [UserController::class,'createGrade']);
 });
-
+use App\Http\Controllers\FileController;
+Route::post('/file',[FileController::class,'file']);
 
 
 
